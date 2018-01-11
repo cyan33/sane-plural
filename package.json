@@ -1,0 +1,28 @@
+{
+  "name": "sane-plural",
+  "version": "0.0.1",
+  "description": "The sane way to get the plural form of nouns",
+  "main": "./lib/index.js",
+  "scripts": {
+    "clean": "rm -rf ./lib",
+    "build": "npm run clean && parcel build ./src/index.js -d ./lib",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyan33/sane-plural.git"
+  },
+  "keywords": [
+    "plural"
+  ],
+  "author": "Chang Yan <thomasyim94@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cyan33/sane-plural/issues"
+  },
+  "homepage": "https://github.com/cyan33/sane-plural#readme",
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "parcel-bundler": "^1.4.1"
+  }
+}
