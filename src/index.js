@@ -1,8 +1,5 @@
-import rules, { addRule } from './rules'
-
-function type(o) {
-  return toString.call(o).slice(8, -1).toLowerCase()
-}
+import rules, { addRules } from './rules'
+import { type } from './utils'
 
 function plural(noun, amount, pluralForm) {
   // fallback
@@ -10,24 +7,26 @@ function plural(noun, amount, pluralForm) {
     return amount > 1 ? pluralForm : noun
   }
 
-  if (amount > 1 || amount === undefined ) {
-    for (let rule of rules) {
-      const key = Object.keys(rule)[0]
+  if (arguments.length === 1 && type(noun) !== 'string') {
+    throw Error('Must provide a string as noun.')
+  }
+  
+  if (amount <= 1) return noun
 
-      if (type(key) === 'string' && key === noun) {
-        return type(rule[key]) === 'function' ? rule[key](noun) : rule[key]
-      }
+  for (let rule of rules) {
+    const key = Object.keys(rule)[0]
 
-      if (type(key) === 'regex' && key.test(noun)) {
-        return type(rule[key]) === 'function' ? rule[key](noun, key) : rule[key]
-      }
+    if (type(key) === 'string' && key === noun) {
+      return type(rule[key]) === 'function' ? rule[key](noun) : rule[key]
     }
 
-    return noun + 's'
+    if (type(key) === 'regex' && key.test(noun)) {
+      return type(rule[key]) === 'function' ? rule[key](noun, key) : rule[key]
+    }
   }
 
-  return noun
+  return noun + 's'
 }
 
 export default plural
-export { addRule }
+export { addRules }

@@ -2,6 +2,8 @@
 
 The sane way to get the plural form of nouns.
 
+[Full document](docs/api.md)
+
 ## Usage
 
 ```sh
@@ -23,8 +25,6 @@ import plural from 'sane-plural'
 var amount = 5
 console.log(`${plural('record', amount)}`)  // "records"
 ```
-
-See more from the [document]().
 
 ## Motivation
 
