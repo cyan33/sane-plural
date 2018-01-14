@@ -50,10 +50,13 @@ And you could add a bunch of rules together wrapped in an object:
 ```js
 addRules({
   'person': 'people',
-  [/\bsheep|deer\b/i]: (word) => word,
-  [/(fe?$)/i]: (word, regex) => {
-    return w.replace(regex, 'ves')
-  })
+  'man': 'men'
+})
+
+// regex can only be added this way and cannot be passed into an object as a key
+addRules(/\bsheep|deer\b/i, (word) => word)
+addRules(/(fe?$)/i, (word, regex) => {
+  return w.replace(regex, 'ves')
 })
 ```
 

@@ -3,35 +3,33 @@ import { type } from './utils'
 const rules = []
 
 function addSingleRule(rule, fn) {
-  rules.unshift({
-    [rule]: fn
-  })
-  return plural
+  rules.unshift([rule, fn])
+  return
 }
 
 export function addRules(rule, fn) {
-  if (type(rule) === 'object') {
+  if (type(rule) === 'object' && !fn) {
     for (let key in rule) {
-      addSingleRule(rule, rule[key])
+      addSingleRule(key, rule[key])
     }
-    return plural
+    return
   }
   addSingleRule(rule, fn)
 }
 
 function prepareRules() {
-  addRules({
-    [/x$|ch$|s$/i]: (w) => w + 'es',
-    [/[^aeiouy]o$/i]: (w) => w + 'es',
-    [/[^aeiou]y$|quy$/i]: (w) => w.slice(0, -1) + 'ies',
-    [/(fe?$)/i]: (w, regex) => w === 'dwarf' || w === 'roof' ? w + 's' : w.replace(regex, 'ves')
+  addSingleRule(/x$|ch$|s$/i, (w) => w + 'es')
+  addSingleRule(/[^aeiouy]o$/i, (w) => w + 'es')
+  addSingleRule(/[^aeiou]y$|quy$/i, (w) => w.slice(0, -1) + 'ies')
+  addSingleRule(/(fe?$)/i, (w, regex) => {
+    return w === 'dwarf' || w === 'roof' ? w + 's' : w.replace(regex, 'ves')
   })
 
   // woman, man
-  addRules(/^(?:wo)?man$/i, (w) => w.replace(/a/, 'e'))
+  addSingleRule(/^(?:wo)?man$/i, (w) => w.replace(/a/, 'e'))
 
   // remain unchanged
-  addRules(/\b(?:bison|cod|deer|fowl|halibut|moose|sheep|kudos?|premises|shambles)\b/i, (w) => w)
+  addSingleRule(/\b(?:bison|cod|deer|fowl|halibut|moose|sheep|kudos?|premises|shambles)\b/i, (w) => w)
 
   // irregular plurals
   addRules({

@@ -14,14 +14,13 @@ function plural(noun, amount, pluralForm) {
   if (amount <= 1) return noun
 
   for (let rule of rules) {
-    const key = Object.keys(rule)[0]
-
-    if (type(key) === 'string' && key === noun) {
-      return type(rule[key]) === 'function' ? rule[key](noun) : rule[key]
+    const key = rule[0]
+    if (type(key) === 'string' && noun === key) {
+      return type(rule[1]) === 'function' ? rule[1](noun) : rule[1]
     }
 
-    if (type(key) === 'regex' && key.test(noun)) {
-      return type(rule[key]) === 'function' ? rule[key](noun, key) : rule[key]
+    if (type(key) === 'regexp' && key.test(noun)) {
+      return type(rule[1]) === 'function' ? rule[1](noun, key) : rule[1]
     }
   }
 
