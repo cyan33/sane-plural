@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf ./lib",
     "build": "npm run clean && babel ./src -d ./lib",
-    "test": "jest --watch /__test__",
+    "test": "npm run build && jest --watch /__test__",
     "prepublishOnly": "npm run build"
   },
   "repository": {

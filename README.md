@@ -1,5 +1,7 @@
 # sane-plural
 
+[![Build Status](https://travis-ci.org/cyan33/sane-plural.svg?branch=master)](https://travis-ci.org/cyan33/sane-plural)
+
 The sane way to get the plural form of nouns.
 
 [Full document](docs/api.md)
