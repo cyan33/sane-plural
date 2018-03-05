@@ -1,4 +1,5 @@
 import { type } from './utils'
+import irregularPlurals from 'irregular-plurals'
 
 const rules = []
 
@@ -25,24 +26,8 @@ function prepareRules() {
     return w === 'dwarf' || w === 'roof' ? w + 's' : w.replace(regex, 'ves')
   })
 
-  // woman, man
-  addSingleRule(/^(?:wo)?man$/i, (w) => w.replace(/a/, 'e'))
-
-  // remain unchanged
-  addSingleRule(/\b(?:bison|cod|deer|fowl|halibut|moose|sheep|kudos?|premises|shambles)\b/i, (w) => w)
-
   // irregular plurals
-  addRules({
-    'criterion': 'criteria',
-    'bacterium': 'bacteria',
-    'memo': 'memos',
-    'cello': 'cellos',
-    'die': 'dice',
-    'goose': 'geese',
-    'mouse': 'mice',
-    'person': 'people',
-    'chilli': 'chillies',
-  })
+  addRules(irregularPlurals)
 
   return rules
 }
