@@ -1,6 +1,6 @@
 {
   "name": "sane-plural",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The sane way to get the plural form of nouns",
   "main": "./lib/index.js",
   "scripts": {
